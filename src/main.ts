@@ -8,7 +8,8 @@ import { SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     MainModule,
-    new FastifyAdapter()
+    new FastifyAdapter(),
+    { logger: ['error', 'verbose', 'warn', 'debug', 'fatal'], },
   );
 
   app.setGlobalPrefix('/api');
@@ -24,7 +25,7 @@ async function bootstrap() {
   SwaggerModule.setup('/docs', app, openApiDocument);
 
   await app.listen({
-    port: parseInt(process.env.APP_PORT) || 5200
+    port: process.env.APP_PORT || 5200
   });
 
   console.log(`server running: ${(await app.getUrl()).replace('[::1]', '127.0.0.1')}`);

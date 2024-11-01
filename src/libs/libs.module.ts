@@ -1,16 +1,10 @@
 import { Module } from "@nestjs/common";
+import { AuthModule } from "./auth/auth.module";
+// import * as schema from '@libs/schema';
 
 @Module({
   imports: [
-    // ConfigModule.forRoot({ isGlobal: true }),
-    // DrizzleModule.forAsyncRoot({
-    //   isGlobal: true,
-    //   useFactory: async (config: ConfigService) => ({
-    //     connection: config.get('DATABASE_URL'),
-    //     schema,
-    //   }),
-    //   inject: [ConfigService]
-    // }),
+    AuthModule
   ]
 })
 export class LibsModule { }
