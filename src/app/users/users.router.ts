@@ -1,4 +1,4 @@
-import { RouterOptions, TsRestResponse } from "@libs/helpers/router";
+import { RouterOptions, TsRestResponse } from "@libs/router/helpers";
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
 
@@ -10,6 +10,4 @@ export const usersRouter = contract.router({
     path: '',
     responses: TsRestResponse(z.any()),
   }
-}, {
-  pathPrefix: 'users'
-});
+}, RouterOptions('users'));

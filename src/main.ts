@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { MainModule } from './main.module';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { generateOpenApi } from '@ts-rest/open-api';
+import { router } from '@libs/router';
+import { SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -9,6 +12,16 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('/api');
+
+  // Docs
+  const openApiDocument = generateOpenApi(router, {
+    info: {
+      title: 'App API',
+      version: '0.0.1',
+    },
+  });
+
+  SwaggerModule.setup('/docs', app, openApiDocument);
 
   await app.listen({
     port: parseInt(process.env.APP_PORT) || 5200
