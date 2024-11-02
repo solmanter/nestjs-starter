@@ -2,9 +2,10 @@ import { usersTable } from '@libs/schema';
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { verify } from 'argon2';
+import { hash, verify } from 'argon2';
 import { like } from 'drizzle-orm';
 import { DrizzleService } from 'nestjs-drizzle/postgres';
+import { authRouter } from './auth.router';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,20 @@ export class AuthService {
     private drizzle: DrizzleService,
     private config: ConfigService
   ) { }
+
+  async register({ body }: TRequest<typeof authRouter.register>) {
+    const [resultUser] = await this.drizzle.insert(usersTable, {
+      username: body.username,
+      password: await hash(body.password)
+    }).returning();
+
+    delete resultUser.password;
+
+    return {
+      ...resultUser,
+      tokens: this.getTokens({ userId: resultUser.id })
+    };
+  }
 
   async validateAccessToken(username: string, password: string) {
     this.drizzle.db.select({

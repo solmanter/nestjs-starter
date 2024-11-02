@@ -6,17 +6,21 @@ import { GetUser } from '@libs/config/get-user.decorator';
 import { IsPublic } from '@libs/config/public.decorator';
 import { JwtRefreshGuard } from './jwt-refresh.guard';
 
+@IsPublic()
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
-  @IsPublic()
+  @TsRest(authRouter.register)
+  register(@TsRestRequest() request: TRequest<typeof authRouter.register>) {
+    return this.authService.register(request);
+  }
+
   @TsRest(authRouter.login)
   login(@TsRestRequest() { body }: TRequest<typeof authRouter.login>) {
     return this.authService.validateAccessToken(body.username, body.password);
   }
 
-  @IsPublic()
   @UseGuards(JwtRefreshGuard)
   @TsRest(authRouter.refresh)
   refresh(

@@ -46,7 +46,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "luxon": "^3.5.0",
-    "nestjs-drizzle": "^0.9.6",
+    "nestjs-drizzle": "^0.9.7",
     "passport-jwt": "^4.0.1",
     "pg": "^8.13.1",
     "prettier": "^3.3.3",

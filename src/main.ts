@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { MainModule } from './main.module';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { generateOpenApi } from '@ts-rest/open-api';
-import { router } from '@libs/router';
+import { RouterContract } from '@libs/router/contract';
 import { SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -15,7 +15,7 @@ async function bootstrap() {
   app.setGlobalPrefix('/api');
 
   // Docs
-  const openApiDocument = generateOpenApi(router, {
+  const openApiDocument = generateOpenApi(RouterContract, {
     info: {
       title: 'App API',
       version: '0.0.1',

@@ -1,4 +1,5 @@
 import { TsRestResponse } from '@libs/router/helpers';
+import { UserSchema } from '@libs/schema';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
@@ -11,6 +12,15 @@ const TokensSchema = z.object({
 
 export const authRouter = contract.router(
   {
+    register: {
+      method: 'POST',
+      path: '/register',
+      body: z.object({
+        username: z.string().min(1).max(32),
+        password: z.string().min(4).max(32),
+      }),
+      responses: TsRestResponse(UserSchema),
+    },
     login: {
       method: 'POST',
       path: '/login',

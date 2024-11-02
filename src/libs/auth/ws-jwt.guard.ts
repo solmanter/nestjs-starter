@@ -7,19 +7,19 @@ export class WsJwtGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const client: SocketPayload = context.switchToWs().getClient<SocketPayload>();
-    const token = client.handshake.auth?.token; // Get the JWT token from the `auth` field
+    const token = client.handshake.auth?.token; 
 
     if (!token) {
-      return false; // Deny connection if no token is provided
+      return false; 
     }
 
     try {
-      const decoded = this.jwtService.verify(token) as UserPayload; // Verify the token
+      const decoded = this.jwtService.verify(token) as UserPayload;
       client.user = decoded;
-      return true; // Allow connection
+      return true; 
     } catch (err) {
       console.log('Invalid token:', err);
-      return false; // Deny connection if the token is invalid
+      return false;
     }
   }
 }

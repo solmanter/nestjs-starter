@@ -7,6 +7,6 @@ export class UsersService {
   constructor(private drizzle: DrizzleService<ISchema>) { }
 
   getUsers() {
-    return this.drizzle.get(usersTable);
+    return this.drizzle.getWithout(usersTable);
   }
 }

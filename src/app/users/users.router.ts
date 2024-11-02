@@ -10,5 +10,6 @@ export const usersRouter = contract.router({
     method: 'GET',
     path: '',
     responses: TsRestResponse(z.array(UserSchema)),
+    summary: 'Get Users'
   }
 }, RouterOptions('users'));
