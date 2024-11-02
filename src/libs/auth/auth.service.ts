@@ -52,12 +52,13 @@ export class AuthService {
   async validateRefreshToken(refreshToken: string, payload: UserPayload) {
     const isValidRefreshToken = this.jwt.verify(refreshToken, {
       secret: this.config.get('JWT_REFRESH_SECRET'),
+      ignoreExpiration: false
     });
 
-    const { userId } = payload;
-    if (isValidRefreshToken) return this.getTokens({ userId });
-    else {
-      throw new Error('Invalid refresh token');
+    if (!isValidRefreshToken) throw new Error('Invalid refresh token');
+
+    return {
+      access_token: this.getJwtAccessToken({ userId: payload.userId })
     }
   }
 
@@ -69,10 +70,7 @@ export class AuthService {
   }
 
   private getJwtAccessToken(payload: UserPayload) {
-    return this.jwt.sign(payload, {
-      secret: this.config.get('JWT_ACCESS_SECRET'),
-      expiresIn: '30m'
-    });
+    return this.jwt.sign(payload);
   }
 
   private getJwtRefreshToken(payload: UserPayload) {
