@@ -17,7 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "export VITE_CJS_IGNORE_WARNING=true; vitest run --config config/vitest.config.ts",
     "db:generate": "npx drizzle-kit generate --config config/drizzle.config.ts",
     "db:push": "npx drizzle-kit push --config config/drizzle.config.ts"
   },
@@ -58,12 +58,15 @@
     "@nestjs/cli": "^10.4.5",
     "@nestjs/schematics": "^10.2.3",
     "@nestjs/testing": "^10.4.6",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.7.42",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.8.5",
     "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.11.10",
     "@types/supertest": "^6.0.2",
+    "@vitest/coverage-v8": "^2.1.4",
     "drizzle-kit": "^0.27.0",
     "eslint": "^9.13.0",
     "eslint-config-nestjs": "^0.8.0",
@@ -74,7 +77,9 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "unplugin-swc": "^1.5.1",
+    "vitest": "^2.1.4"
   },
   "jest": {
     "moduleFileExtensions": [
