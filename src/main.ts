@@ -4,6 +4,7 @@ import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify
 import { generateOpenApi } from '@ts-rest/open-api';
 import { RouterContract } from '@libs/router/contract';
 import { SwaggerModule } from '@nestjs/swagger';
+import { GlobalExceptionFilter } from '@libs/config/global.exception';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -23,6 +24,8 @@ async function bootstrap() {
   });
 
   SwaggerModule.setup('/docs', app, openApiDocument);
+
+  app.useGlobalFilters(new GlobalExceptionFilter());
 
   await app.listen({
     port: process.env.APP_PORT || 5200
