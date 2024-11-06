@@ -1,5 +1,5 @@
-import { TsRestResponse } from '@libs/router/helpers';
-import { UserSchema } from '@libs/schema';
+import { TsRestResponse } from '@packages/router/helpers';
+import { UserSchema } from '@packages/schema';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 

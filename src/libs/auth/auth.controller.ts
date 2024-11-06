@@ -1,9 +1,8 @@
 import { Controller, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
 import { TsRest, TsRestRequest } from '@ts-rest/nest';
+import { AuthService } from './auth.service';
 import { authRouter } from './auth.router';
-import { GetUser } from '@libs/config/get-user.decorator';
-import { IsPublic } from '@libs/config/public.decorator';
+import { GetUser, IsPublic } from '@packages/config';
 import { JwtRefreshGuard } from './jwt-refresh.guard';
 
 @IsPublic()

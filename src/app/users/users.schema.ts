@@ -1,9 +1,10 @@
+import { nanoid } from "@packages/nanoid";
 import { sql } from "drizzle-orm";
-import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
-import { createSelectSchema } from "@libs/package";
+import { pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
+import { createSelectSchema } from "drizzle-zod";
 
 export const usersTable = pgTable('users', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: varchar('id').primaryKey().$default(nanoid),
 
   username: varchar('username', { length: 32 }).notNull(),
   password: varchar('password').notNull(),

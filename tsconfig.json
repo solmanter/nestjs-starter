@@ -20,7 +20,8 @@
     "strict": true,
     "paths": {
       "@app/*": ["src/app/*"],
-      "@libs/*": ["src/libs/*"]
+      "@libs/*": ["src/libs/*"],
+      "@packages/*": ["src/packages/*"]
     }
   }
 }

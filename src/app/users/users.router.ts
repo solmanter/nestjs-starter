@@ -1,4 +1,4 @@
-import { RouterOptions, TsRestResponse } from "@libs/router/helpers";
+import { RouterOptions, TsRestResponse } from "@packages/router/helpers";
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
 import { UserSchema } from "./users.schema";

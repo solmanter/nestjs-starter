@@ -1,4 +1,4 @@
-import { usersTable } from '@libs/schema';
+import { usersTable } from '@packages/schema';
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';

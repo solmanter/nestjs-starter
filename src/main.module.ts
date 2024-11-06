@@ -3,7 +3,7 @@ import { LibsModule } from '@libs/libs.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DrizzleModule } from 'nestjs-drizzle/postgres';
-import * as schema from '@libs/schema'
+import * as schema from '@packages/schema'
 
 @Module({
   imports: [

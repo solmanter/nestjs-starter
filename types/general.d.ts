@@ -11,4 +11,4 @@ declare type GetDataColumn<T extends Record<string, Column>> = {
   [K in keyof T]: import('drizzle-orm').GetColumnData<T[K]>;
 };
 
-declare type ISchema = typeof import('@libs/schema');
+declare type ISchema = typeof import('@packages/schema');
